@@ -1,9 +1,3 @@
-/*
- * NAME: Hedley Hyde
- * UNIVERSITY ID: 5700617
- * DEPARTMENT: Mathematics
- */
-
 public class Complex {
   private double x;
   private double y;
