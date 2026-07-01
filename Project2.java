@@ -1,9 +1,3 @@
-/*
- * NAME: Hedley Hyde
- * UNIVERSITY ID: 5700617
- * DEPARTMENT: Mathematics
- */
-
 import java.awt.*;
 import java.awt.image.*;
 import java.io.*;

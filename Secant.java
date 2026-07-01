@@ -1,9 +1,3 @@
-/*
- * NAME: Hedley Hyde
- * UNIVERSITY ID: 5700617
- * DEPARTMENT: Mathematics
- */
-
 public class Secant {
   public static final int MAXITER = 20;
   public static final double TOL = 1.0e-10;
