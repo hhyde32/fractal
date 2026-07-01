@@ -12,7 +12,6 @@ public class Polynomial {
         }
         
         // ititialise polynomial with a single zero valued coefficient if empty array given
-        // otherwise    
         if (r < 0) {
             this.coeff = new Complex[1];
             this.coeff[0] = new Complex();
