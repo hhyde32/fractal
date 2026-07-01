@@ -23,6 +23,7 @@ public class Project2 {
     public static final int NUMPIXELS = 400;
 
     public Project2(Polynomial p, Complex origin, double width) {
+        // initialises variables
         this.iterator = new Secant(p);
         this.width = width;
         this.origin = origin;
@@ -30,10 +31,12 @@ public class Project2 {
     }
 
     public void printRoots() {
+        // print roots
         System.out.println(this.roots);
     }
 
     public ArrayList<Complex> getRoots() {
+        // get roots
         return roots;
     }
 
@@ -47,6 +50,7 @@ public class Project2 {
     }
 
     public Complex pixelToComplex(int i, int j) {
+        // convert pixel positions to complex numbers starting from the origin
         double dz = width / NUMPIXELS;
         return new Complex(origin.getReal() + i * dz, origin.getImag() - j * dz);
     }
@@ -55,11 +59,14 @@ public class Project2 {
 
         this.colourIterations = colourIterations;
         this.roots = new ArrayList<Complex>();
-
+        
+        // interate over each pixel at position (j, k))
         for (int j = 0; j < NUMPIXELS; j++) {
             for (int k = 0; k < NUMPIXELS; k++) {
+                // translate pixel to complex number
                 Complex z = pixelToComplex(j, k);
 
+                // use zero and this complex number as starting points to run though secant algorithm
                 iterator.iterate(new Complex(), z);
 
                 if (iterator.getError() != Secant.Error.OK) {
@@ -71,12 +78,13 @@ public class Project2 {
 
                 int rootIndex = index(root);
 
+                // check to see if root is found already
                 if (rootIndex == -1) {
                     if (roots.size() < 5) {
                         roots.add(root);
                         rootIndex = roots.size() - 1;
                     } else {
-                        return; // skip colouring if something went wrong
+                        return; // skip colouring if something goes wrong
                     }
                 }
 
@@ -86,6 +94,7 @@ public class Project2 {
     }
 
     public static void main(String[] args) {
+        // tests
         Complex[] coeff =
             new Complex[] {
                 new Complex(1.0, 1.0),
@@ -104,19 +113,9 @@ public class Project2 {
         project.saveFractal("fractal-dark.png");
     }
 
-    // ====================================================================
-    // OTHER FUNCTIONS
-    //
-    // The rest of the functions in this class are COMPLETE (with the
-    // exception of the main function) since they involve quite complex Java
-    // code to deal with the graphics. This means they *do not* and *should
-    // not* need to be altered! But you should read their descriptions so you
-    // know how to use them.
-    // ====================================================================
 
-    /** Sets up all the fractal image. Make sure that your constructor calls this function! */
     private void setupFractal() {
-        // This function is complete!
+        // sets up the fractal image
         int i, j;
 
         if (iterator.getF().degree() < 3 || iterator.getF().degree() > 5)
@@ -154,7 +153,6 @@ public class Project2 {
      * @param numIter Number of iterations at this root.
      */
     private void colourPixel(int i, int j, int rootColour, int numIter) {
-        // This function is complete!
         if (colourIterations) g2.setColor(colours[rootColour][numIter - 1]);
         else g2.setColor(colours[rootColour][0]);
         g2.fillRect(i, j, 1, 1);
@@ -162,11 +160,8 @@ public class Project2 {
 
     /**
      * Saves the fractal image to a file.
-     *
-     * @param fileName The filename to save the image as. Should end in .png.
      */
     public void saveFractal(String fileName) {
-        // This function is complete!
         try {
             File outputfile = new File(fileName);
             ImageIO.write(fractal, "png", outputfile);
