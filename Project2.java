@@ -50,7 +50,7 @@ public class Project2 {
     }
 
     public Complex pixelToComplex(int i, int j) {
-        // convert pixel positions to complex numbers starting from the origin
+        // converts pixel positions to complex numbers starting from the origin
         double dz = width / NUMPIXELS;
         return new Complex(origin.getReal() + i * dz, origin.getImag() - j * dz);
     }
