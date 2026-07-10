@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
 
-public class Project2 {
+public class Main {
     // main project class that generates fractal images
     private Secant iterator;
     private Complex origin;
@@ -22,7 +22,7 @@ public class Project2 {
 
     public static final int NUMPIXELS = 400;
 
-    public Project2(Polynomial p, Complex origin, double width) {
+    public Main(Polynomial p, Complex origin, double width) {
         // initialises variables
         this.iterator = new Secant(p);
         this.width = width;
@@ -94,7 +94,6 @@ public class Project2 {
     }
 
     public static void main(String[] args) {
-        // tests
         Complex[] coeff =
             new Complex[] {
                 new Complex(1.0, 1.0),
