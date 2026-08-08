@@ -7,5 +7,7 @@ algorithm to find roots.
 
 ## Explanation
 
-The main interest of this project is to study the behaviour of root convergence on a grid.
-It involves colouring a grid according to what root of a given complex polynomial it converges to using a secant algorithm.
+The main interest of this project is to study the behavior of root convergence in the complex plane.
+It involves coloring points on a grid according to what root of a complex polynomial it converges to using a secant algorithm.
+It may be intuitive to think that each point converges to the root that is closest in distance to it but it is not the case.
+As you can see it forms these beautiful patterns that are infinitely detailed.
