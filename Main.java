@@ -59,7 +59,7 @@ public class Main {
 
         this.colourIterations = colourIterations;
         this.roots = new ArrayList<Complex>();
-        
+
         // interate over each pixel at position (j, k))
         for (int j = 0; j < NUMPIXELS; j++) {
             for (int k = 0; k < NUMPIXELS; k++) {
@@ -94,6 +94,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
+        // Complex number and range to draw the fractal for
         Complex[] coeff =
             new Complex[] {
                 new Complex(1.0, 1.0),
@@ -104,12 +105,12 @@ public class Main {
                 new Complex(6.0, 6.0)
             };
         Polynomial p = new Polynomial(coeff);
-        Project2 project = new Project2(p, new Complex(-2.0, 1.0), 2.0);
+        Main project = new Main(p, new Complex(-2.0, 1.0), 2.0);
 
         project.createFractal(false);
-        project.saveFractal("fractal-light.png");
+        project.saveFractal("images/fractal-light.png");
         project.createFractal(true);
-        project.saveFractal("fractal-dark.png");
+        project.saveFractal("images/fractal-dark.png");
     }
 
 
