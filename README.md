@@ -3,7 +3,7 @@ This project generates Newton fractal images from polynomials, using the secant
 algorithm to find roots.
 
 ## Visualisation
-![Fractal diagrams](fractal-light.pmg)
+![Fractal diagrams](image/fractal-light.png)
 
 ## Explanation
 
