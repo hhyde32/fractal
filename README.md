@@ -19,4 +19,21 @@ pixels; the brighter a pixel is the fewer iterations it took to arrive at a root
 #### Dark fractal
 <img src="images/fractal-dark.png" alt="Dark fractal" style="width: 300px;">
 
+## Usage
 
+Clone the repository:
+
+```bash
+git clone https://github.com/hhyde32/matvar.git
+cd matvar
+pip install -r requirements.txt
+```
+
+Run the following commands to compile and save the generated fractals to the images directory.
+This may take around a minute depending on your system.
+
+```bash
+javac Main.java
+java Main
+```
+You can edit the botto of the Main.java file to generate different fractals.
