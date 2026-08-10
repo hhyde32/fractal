@@ -1,4 +1,4 @@
-# Fractal
+# Newton Fractal
 This project generates [Newton fractal](https://en.wikipedia.org/wiki/Newton_fractal) images from 
 polynomials, using the [Secant algorithm](https://en.wikipedia.org/wiki/Secant_method) to find roots.
 
