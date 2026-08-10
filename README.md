@@ -3,7 +3,10 @@ This project generates Newton fractal images from polynomials, using the secant
 algorithm to find roots.
 
 ## Visualisation
-![Fractal diagrams](images/fractal-light.png)
+The following diagrams are of the polynomial $f(z) = z^3 - 1$ centered at $-2.0 + 2.0i$
+with a width of $4$
+![Fractal light diagram](images/fractal-light.png)
+![Fractal dark diagram](images/fractal-dark.png)
 
 ## Explanation
 
