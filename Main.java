@@ -62,13 +62,13 @@ public class Main {
         this.colourIterations = colourIterations;
         this.roots = new ArrayList<Complex>();
 
-        // Iterate over each pixel at position (j, k)).
+        // Iterate over each pixel at position (j, k).
         for (int j = 0; j < NUMPIXELS; j++) {
             for (int k = 0; k < NUMPIXELS; k++) {
                 // Translate each pixel to a complex number.
                 Complex z = pixelToComplex(j, k);
 
-                // Use zero and this complex number as starting points to run though secant algorithm.
+                // Use zero and this complex number as to run though secant algorithm.
                 iterator.iterate(new Complex(), z);
 
                 if (iterator.getError() != Secant.Error.OK) {
@@ -127,10 +127,13 @@ public class Main {
     }
 
     private void colourPixel(int i, int j, int rootColour, int numIter) {
-        // Colour a pixel in the image.
-        if (colourIterations) g2.setColor(colours[rootColour][numIter - 1]);
-        else g2.setColor(colours[rootColour][0]);
-        g2.fillRect(i, j, 1, 1);
+        // Colour a pixel in the image depending on whether the fractal is dark/light.
+        if (colourIterations) {
+            g2.setColor(colours[rootColour][numIter - 1]);
+        } else {
+            g2.setColor(colours[rootColour][0]);
+            g2.fillRect(i, j, 1, 1);
+        }
     }
 
     public void saveFractal(String fileName) {
