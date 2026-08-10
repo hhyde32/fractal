@@ -1,5 +1,5 @@
 public class Secant {
-    // class that performs secant algorithm to calculate roots
+    // Class to performs secant algorithm.
 
     public static final int MAXITER = 20;
     public static final double TOL = 1.0e-10;
@@ -16,37 +16,40 @@ public class Secant {
     private Error err = Error.OK;
 
     public Secant(Polynomial p) {
-        // initialise the polynomial stored by Secant
+        // Initialise the polynomial.
         this.f = p;
     }
 
-    // getter methods
     public Error getError() {
+        // Get error.
         return err;
     }
 
     public int getNumIterations() {
+        // Get the number of iterations needed to find the root.
         return numIterations;
     }
 
     public Complex getRoot() {
+        // Get the root the algorithm converges to.
         return root;
     }
 
     public Polynomial getF() {
+        // Get the polynomial.
         return f;
     }
 
     public void iterate(Complex z0, Complex z1) {
-        // performs secant algorithm iteratively
-        
-        // initialise starting points
+        // Perform secant algorithm. 
+
+        // Initialise starting points.
         Complex z0curr = z0;
         Complex z1curr = z1;
         int M = 1;
         err = Error.OK;
 
-        // continues until f(z) is close to zero or difference between terms is negligable 
+        // Continues until f(z) is close to zero or difference between terms is negligable.
         while (z1curr.add(z0curr.negate()).abs() > TOL && f.evaluate(z1curr).abs() > TOL) {
 
             Complex fz0 = f.evaluate(z0curr);
@@ -54,7 +57,7 @@ public class Secant {
 
             Complex denom = fz1.add(fz0.negate());
 
-            // catch potential zero division error
+            // Catch potential zero division error.
             if (denom.abs() < TOL) {
                 err = Error.ZERO;
                 break;
@@ -68,7 +71,7 @@ public class Secant {
 
             M++;
 
-            // stop running if current iteration exceeds max interation
+            // Stop running if current iteration exceeds max interation.
             if (M >= MAXITER) {
                 err = Error.DNF;
                 break;
@@ -80,9 +83,8 @@ public class Secant {
     }
 
     public static void main(String[] args) {
-        // tests
-        Complex[] coeff =
-            new Complex[] {new Complex(-1.0, 0.0), new Complex(), new Complex(), new Complex(1.0, 0.0)};
+        // Tests.
+        Complex[] coeff = new Complex[] {new Complex(-1.0, 0.0), new Complex(), new Complex(), new Complex(1.0, 0.0)};
         Polynomial p = new Polynomial(coeff);
         Secant s = new Secant(p);
 

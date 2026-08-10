@@ -1,17 +1,17 @@
 public class Polynomial {
-    // class for storing a polynomial with complex coefficients
+    // Class for storing a polynomial with complex coefficients.
     Complex[] coeff;
 
     public Polynomial(Complex[] coeff) {
-        // initialises polynomial given an array of complex numbers
+        // Initialises polynomial with an array of complex numbers.
         int r = coeff.length - 1;
 
-        // removes trailing zero coefficients
+        // Remove trailing zero coefficients.
         while (r >= 0 && coeff[r].abs() == 0) {
             r--;
         }
         
-        // ititialise polynomial with a single zero valued coefficient if empty array given
+        // Ititialise the polynomial with a single zero valued coefficient if empty array supplied.
         if (r < 0) {
             this.coeff = new Complex[1];
             this.coeff[0] = new Complex();
@@ -25,18 +25,18 @@ public class Polynomial {
     }
 
     public Polynomial() {
-        // ititialise polynomial with a single zero valued coefficient if no array given
+        // Ititialise the polynomial with a single zero valued coefficient if no array is given.
         this.coeff = new Complex[1];
         this.coeff[0] = new Complex();
     }
 
     public Complex[] getCoeff() {
-        // return a copy of the polynomials coefficients
+        // Get the coefficients of the polnomial.
         return coeff.clone();
     }
 
     public String toString() {
-        // return string representation of polyniomial
+        // Convert to string.
         String res = "";
 
         for (int i = 0; i < coeff.length; i++) {
@@ -61,12 +61,12 @@ public class Polynomial {
     }
 
     public int degree() {
-        // returns degree of the polynomial
+        // Get the degree of the polynomial.
         return coeff.length - 1;
     }
 
     public Complex evaluate(Complex z) {
-        // evaluates the polynomial at a given Complex number
+        // Evaluate the polynomial at a complex number z.
         Complex res = new Complex(0, 0);
         Complex zPower = new Complex(1, 0);
 
@@ -74,7 +74,7 @@ public class Polynomial {
             Complex term = coeff[i].multiply(zPower);
             res = res.add(term);
             
-            // update zPower
+            // Update zPower.
             zPower = zPower.multiply(z);
         }
 
@@ -82,7 +82,7 @@ public class Polynomial {
     }
 
     public static void main(String[] args) {
-        // tests
+        // Tests.
         Complex[] coeff = new Complex[3];
         coeff[0] = new Complex(1, 2);
         coeff[1] = new Complex(2, 1);

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 
 public class Main {
-    // main project class that generates fractal images
+    // Main project class to generate fractal images.
     private Secant iterator;
     private Complex origin;
     private double width;
@@ -23,7 +23,7 @@ public class Main {
     public static final int NUMPIXELS = 400;
 
     public Main(Polynomial p, Complex origin, double width) {
-        // initialises variables
+        // Initialises variables.
         this.iterator = new Secant(p);
         this.width = width;
         this.origin = origin;
@@ -31,16 +31,17 @@ public class Main {
     }
 
     public void printRoots() {
-        // print roots
+        // Print roots.
         System.out.println(this.roots);
     }
 
     public ArrayList<Complex> getRoots() {
-        // get roots
+        // Get roots.
         return roots;
     }
 
     public int index(Complex root) {
+        // Get the index of a roots.
         for (int i = 0; i < roots.size(); i++) {
             if (roots.get(i).add(root.negate()).abs() < Secant.TOL) {
                 return i;
@@ -50,27 +51,28 @@ public class Main {
     }
 
     public Complex pixelToComplex(int i, int j) {
-        // converts pixel positions to complex numbers starting from the origin
+        // Converts pixel positions to complex numbers starting from the origin.
         double dz = width / NUMPIXELS;
         return new Complex(origin.getReal() + i * dz, origin.getImag() - j * dz);
     }
 
     public void createFractal(boolean colourIterations) {
+        // Create a fractal image.
 
         this.colourIterations = colourIterations;
         this.roots = new ArrayList<Complex>();
 
-        // interate over each pixel at position (j, k))
+        // Iterate over each pixel at position (j, k)).
         for (int j = 0; j < NUMPIXELS; j++) {
             for (int k = 0; k < NUMPIXELS; k++) {
-                // translate pixel to complex number
+                // Translate each pixel to a complex number.
                 Complex z = pixelToComplex(j, k);
 
-                // use zero and this complex number as starting points to run though secant algorithm
+                // Use zero and this complex number as starting points to run though secant algorithm.
                 iterator.iterate(new Complex(), z);
 
                 if (iterator.getError() != Secant.Error.OK) {
-                    continue; // skip this pixel
+                    continue; // Skip this pixel.
                 }
 
                 Complex root = iterator.getRoot();
@@ -78,13 +80,13 @@ public class Main {
 
                 int rootIndex = index(root);
 
-                // check to see if root is found already
+                // Check to see if root is found already.
                 if (rootIndex == -1) {
                     if (roots.size() < 5) {
                         roots.add(root);
                         rootIndex = roots.size() - 1;
                     } else {
-                        return; // skip colouring if something goes wrong
+                        return; // Skip colouring if something goes wrong.
                     }
                 }
 
@@ -93,29 +95,9 @@ public class Main {
         }
     }
 
-    public static void main(String[] args) {
-        // Complex number and range to draw the fractal for
-        Complex[] coeff =
-            new Complex[] {
-                new Complex(1.0, 1.0),
-                new Complex(2.0, 2.0),
-                new Complex(3.0, 3.0),
-                new Complex(4.0, 4.0),
-                new Complex(5.0, 5.0),
-                new Complex(6.0, 6.0)
-            };
-        Polynomial p = new Polynomial(coeff);
-        Main project = new Main(p, new Complex(-2.0, 1.0), 2.0);
-
-        project.createFractal(false);
-        project.saveFractal("images/fractal-light.png");
-        project.createFractal(true);
-        project.saveFractal("images/fractal-dark.png");
-    }
-
 
     private void setupFractal() {
-        // sets up the fractal image
+        // Set up the fractal image.
         int i, j;
 
         if (iterator.getF().degree() < 3 || iterator.getF().degree() > 5)
@@ -144,29 +126,40 @@ public class Main {
         g2 = fractal.createGraphics();
     }
 
-    /**
-     * Colours a pixel in the image.
-     *
-     * @param i x-axis co-ordinate of the pixel located at (i,j)
-     * @param j y-axis co-ordinate of the pixel located at (i,j)
-     * @param rootColour An integer between 0 and 4 inclusive indicating the root number.
-     * @param numIter Number of iterations at this root.
-     */
     private void colourPixel(int i, int j, int rootColour, int numIter) {
+        // Colour a pixel in the image.
         if (colourIterations) g2.setColor(colours[rootColour][numIter - 1]);
         else g2.setColor(colours[rootColour][0]);
         g2.fillRect(i, j, 1, 1);
     }
 
-    /**
-     * Saves the fractal image to a file.
-     */
     public void saveFractal(String fileName) {
+        // Save the fractal image to a file.
         try {
             File outputfile = new File(fileName);
             ImageIO.write(fractal, "png", outputfile);
         } catch (IOException e) {
             System.out.println("I got an error trying to save! Maybe you're out of space?");
         }
+    }
+
+    public static void main(String[] args) {
+        // Complex number and range to draw the fractal for.
+        Complex[] coeff =
+            new Complex[] {
+                new Complex(1.0, 1.0),
+                new Complex(2.0, 2.0),
+                new Complex(3.0, 3.0),
+                new Complex(4.0, 4.0),
+                new Complex(5.0, 5.0),
+                new Complex(6.0, 6.0)
+            };
+        Polynomial p = new Polynomial(coeff);
+        Main project = new Main(p, new Complex(-2.0, 1.0), 2.0);
+
+        project.createFractal(false);
+        project.saveFractal("images/fractal-light.png");
+        project.createFractal(true);
+        project.saveFractal("images/fractal-dark.png");
     }
 }
