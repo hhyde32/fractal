@@ -20,7 +20,7 @@ public class Main {
 
     private Graphics2D g2;
 
-    public static final int NUMPIXELS = 400;
+    public static final int NUMPIXELS = 3840;
 
     public Main(Polynomial p, Complex origin, double width) {
         // Initialises variables.
@@ -86,7 +86,7 @@ public class Main {
                         roots.add(root);
                         rootIndex = roots.size() - 1;
                     } else {
-                        return; // Skip colouring if something goes wrong.
+                        continue; // Skip colouring if something goes wrong.
                     }
                 }
 
@@ -145,18 +145,21 @@ public class Main {
 
     public static void main(String[] args) {
         // Complex number and range to draw the fractal for.
-        Complex[] coeff =
-            new Complex[] {
-                new Complex(1.0, 1.0),
-                new Complex(2.0, 2.0),
-                new Complex(3.0, 3.0),
-                new Complex(4.0, 4.0),
-                new Complex(5.0, 5.0),
-                new Complex(6.0, 6.0)
-            };
-        Polynomial p = new Polynomial(coeff);
-        Main project = new Main(p, new Complex(-2.0, 1.0), 2.0);
 
+        // Coefficients for f(z) = z^3 - 1.
+        Complex[] coeff = new Complex[] {
+            new Complex(-1.0, 0.0), // constant term
+            new Complex(0.0, 0.0),  // z
+            new Complex(0.0, 0.0),  // z^2
+            new Complex(1.0, 0.0)   // z^3
+        };
+
+        Polynomial p = new Polynomial(coeff);
+
+        // Centered at origin (-2.0 + 2.0i) with a width of 4.0.
+        Main project = new Main(p, new Complex(-2.0, 2.0), 4.0);
+
+        // Draw fractal images.
         project.createFractal(false);
         project.saveFractal("images/fractal-light.png");
         project.createFractal(true);
